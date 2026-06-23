@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { AppHeader } from './components/AppHeader.jsx';
 import { AuthPage } from './components/AuthPage.jsx';
 import { DashboardMetrics } from './components/DashboardMetrics.jsx';

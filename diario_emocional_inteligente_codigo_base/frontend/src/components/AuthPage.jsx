@@ -1,3 +1,5 @@
+import React from 'react';
+
 export function AuthPage({ mode, form, loading, notice, onModeChange, onFormChange, onSubmit }) {
   return (
     <main className="auth-page">

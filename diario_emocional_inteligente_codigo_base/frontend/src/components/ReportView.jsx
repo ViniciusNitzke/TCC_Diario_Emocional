@@ -1,3 +1,5 @@
+import React from 'react';
+
 export function ReportView({ report, loading, onExportPdf }) {
   return (
     <section className="workspace two-columns">

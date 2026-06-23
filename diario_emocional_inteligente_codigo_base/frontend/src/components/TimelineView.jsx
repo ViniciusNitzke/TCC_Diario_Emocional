@@ -1,3 +1,5 @@
+import React from 'react';
+
 export function TimelineView({ entries, loading, onRemove }) {
   return (
     <section className="workspace">

@@ -1,3 +1,5 @@
+import React from 'react';
+
 export function SettingsView({ user, loading, onUpdateEsm, onUpdatePrivacy, onDeleteData }) {
   if (!user) return null;
 

@@ -1,3 +1,4 @@
+import React from 'react';
 import { triggerOptions } from '../constants/emotionalCatalog.js';
 
 export function EntryForm({ catalog, form, selectedEmotion, loading, onFormChange, onSubmit }) {

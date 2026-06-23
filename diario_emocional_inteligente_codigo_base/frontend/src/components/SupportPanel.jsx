@@ -1,3 +1,5 @@
+import React from 'react';
+
 export function SupportPanel({ selectedEmotion, suggestion, crisis }) {
   return (
     <aside className="support-panel">

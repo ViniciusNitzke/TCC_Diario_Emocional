@@ -1,3 +1,4 @@
+import React from 'react';
 import { navItems } from '../constants/emotionalCatalog.js';
 
 export function AppHeader({ userName, activeTab, onTabChange, onLogout }) {

@@ -1,3 +1,5 @@
+import React from 'react';
+
 export function DashboardMetrics({ dashboard, report }) {
   return (
     <section className="dashboard-grid">
