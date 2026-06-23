@@ -64,6 +64,15 @@ frontend/src/
 - Modo de acolhimento com passos de estabilizacao e orientacao de busca de ajuda.
 - Configuracoes de ESM e privacidade, incluindo exclusao de registros.
 
+## Documentacao para o TCC
+
+A pasta `docs/` contem uma versao pronta da secao de desenvolvimento:
+
+- `docs/04_DESENVOLVIMENTO.md`: texto base do topico 4, com arquitetura, tecnologias, requisitos de implantacao, trechos de codigo e espaco para prints.
+- `docs/diagramas/caso_de_uso.mmd`: diagrama de caso de uso.
+- `docs/diagramas/arquitetura.mmd`: diagrama de arquitetura.
+- `docs/diagramas/classes.mmd`: diagrama de classes simplificado.
+
 ## Como executar
 
 ### Backend

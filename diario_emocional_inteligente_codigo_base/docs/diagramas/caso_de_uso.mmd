@@ -1,0 +1,24 @@
+flowchart LR
+    Usuario["Usuario"]
+
+    UC1(("Criar conta"))
+    UC2(("Realizar login"))
+    UC3(("Registrar emocao"))
+    UC4(("Consultar historico"))
+    UC5(("Visualizar relatorio"))
+    UC6(("Exportar PDF"))
+    UC7(("Configurar lembretes ESM"))
+    UC8(("Acessar modo de acolhimento"))
+    UC9(("Gerenciar privacidade"))
+    UC10(("Excluir registros"))
+
+    Usuario --> UC1
+    Usuario --> UC2
+    Usuario --> UC3
+    Usuario --> UC4
+    Usuario --> UC5
+    Usuario --> UC6
+    Usuario --> UC7
+    Usuario --> UC8
+    Usuario --> UC9
+    UC9 --> UC10

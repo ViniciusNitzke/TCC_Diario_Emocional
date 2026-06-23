@@ -1,0 +1,17 @@
+flowchart TB
+    Browser["Navegador do usuario"]
+    React["Frontend React + Vite"]
+    Api["ASP.NET Core Web API"]
+    AppLayer["Application: casos de uso e DTOs"]
+    Domain["Domain: entidades e contratos"]
+    Infra["Infrastructure: repositorios, seguranca e PDF"]
+    Json["JSON local demonstrativo"]
+    Firestore["Cloud Firestore em producao"]
+
+    Browser --> React
+    React -->|"REST/JSON"| Api
+    Api --> AppLayer
+    AppLayer --> Domain
+    AppLayer --> Infra
+    Infra --> Json
+    Infra -. substituicao futura .-> Firestore

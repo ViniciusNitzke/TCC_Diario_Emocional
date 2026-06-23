@@ -1,0 +1,54 @@
+classDiagram
+    class User {
+        +Guid Id
+        +string Nome
+        +string Email
+        +DateTimeOffset CriadoEm
+        +PrivacySettings Privacidade
+        +EsmSettings Esm
+    }
+
+    class EmotionalEntry {
+        +Guid Id
+        +Guid UsuarioId
+        +string EmocaoId
+        +string EmocaoNome
+        +int Intensidade
+        +string[] Gatilhos
+        +string Situacao
+        +string Observacao
+        +string Origem
+        +DateTimeOffset CriadoEm
+    }
+
+    class PrivacySettings {
+        +bool BloqueioLocal
+        +bool PermitirRelatorios
+        +bool ConsentimentoDadosSensiveis
+    }
+
+    class EsmSettings {
+        +bool Ativo
+        +string[] Horarios
+        +string Frequencia
+    }
+
+    class EmotionDefinition {
+        +string Id
+        +string Nome
+        +string Familia
+        +string Cor
+        +string Descricao
+    }
+
+    class SelfCareSuggestion {
+        +string Titulo
+        +string Descricao
+        +string Tipo
+    }
+
+    User "1" --> "0..*" EmotionalEntry
+    User "1" --> "1" PrivacySettings
+    User "1" --> "1" EsmSettings
+    EmotionalEntry --> EmotionDefinition
+    EmotionalEntry --> SelfCareSuggestion
