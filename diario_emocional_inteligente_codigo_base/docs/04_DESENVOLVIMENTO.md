@@ -63,15 +63,15 @@ flowchart TB
     Domain["Domain: entidades e contratos"]
     Infra["Infrastructure: repositorios, seguranca e PDF"]
     Json["JSON local demonstrativo"]
-    Firestore["Cloud Firestore em producao"]
+    Firestore["Cloud Firestore configuravel"]
 
     Browser --> React
     React -->|"REST/JSON"| Api
     Api --> AppLayer
     AppLayer --> Domain
     AppLayer --> Infra
-    Infra --> Json
-    Infra -. substituicao futura .-> Firestore
+    Infra -->|"Provider Json"| Json
+    Infra -->|"Provider Firestore"| Firestore
 ```
 
 Figura 2 - Arquitetura logica do software. Fonte: elaborado pelo autor (2026).
@@ -147,7 +147,7 @@ As tecnologias utilizadas foram escolhidas por compatibilidade com aplicacoes we
 - Vite: ambiente de desenvolvimento rapido para frontend.
 - ASP.NET Core Web API: construcao dos endpoints REST e organizacao das regras de negocio.
 - JSON local: persistencia demonstrativa para execucao academica sem credenciais externas.
-- Cloud Firestore: banco NoSQL previsto para evolucao em producao.
+- Cloud Firestore: banco NoSQL implementado como alternativa configuravel para persistencia em nuvem.
 - Firebase Authentication ou OAuth 2.0: autenticacao prevista para ambiente produtivo.
 - GitHub: publicacao obrigatoria do codigo-fonte.
 
@@ -162,7 +162,7 @@ O projeto foi estruturado para seguir boas praticas de Engenharia de Software:
 - Dependency Injection: configuracao centralizada das dependencias.
 - DTO Pattern: separacao entre dados trafegados na API e entidades internas.
 
-Essa organizacao permite que a persistencia demonstrativa em JSON seja substituida por Firestore sem alterar os casos de uso principais.
+Essa organizacao permite alternar entre persistencia demonstrativa em JSON e persistencia em Firestore sem alterar os casos de uso principais.
 
 ## 4.6 Principais telas do produto
 
@@ -285,6 +285,22 @@ Para implantacao em producao, recomenda-se:
 - Logs sem exposicao de dados sensiveis.
 - Rotina de backup e exclusao de dados conforme LGPD.
 
+Para ativar o Firestore no backend, a configuracao deve informar:
+
+```json
+{
+  "Persistence": {
+    "Provider": "Firestore"
+  },
+  "Firestore": {
+    "ProjectId": "id-do-projeto-firebase",
+    "CredentialPath": "caminho-da-chave-service-account.json"
+  }
+}
+```
+
+As colecoes utilizadas sao `usuarios`, `sessoes` e `registrosEmocionais`.
+
 ## 4.9 Repositorio publico
 
 Requisito obrigatorio do TCC:
@@ -294,4 +310,3 @@ Repositorio publico do codigo-fonte: <inserir link do repositorio publico no Git
 ```
 
 Antes da entrega final, publique o projeto no GitHub e substitua o campo acima pelo link real do repositorio.
-

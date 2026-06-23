@@ -3,6 +3,10 @@ obj/
 data/
 node_modules/
 dist/
+build-check/
 .env
 .env.local
+serviceAccountKey.json
+*service-account*.json
+*firebase-adminsdk*.json
 npm-debug.log*

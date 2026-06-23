@@ -133,11 +133,54 @@ http://127.0.0.1:5173
 
 ## Escalabilidade e evolucao
 
-A versao atual usa JSON local para permitir avaliacao sem credenciais externas. Para producao, substitua os repositorios em `Infrastructure/Persistence/Repositories` por implementacoes Firestore mantendo as interfaces do dominio. O restante do sistema continua igual, pois os casos de uso dependem de abstracoes.
+A versao atual usa JSON local por padrao para permitir avaliacao sem credenciais externas, mas tambem possui repositorios Firestore prontos em `Infrastructure/Firebase`. A troca acontece por configuracao, sem alterar os casos de uso nem o frontend.
+
+## Como usar Firebase Cloud Firestore
+
+O projeto ja possui implementacao Firestore na camada `Infrastructure/Firebase`. Por padrao ele continua usando JSON local. Para salvar no Firebase:
+
+1. Crie um projeto no Firebase Console.
+2. Ative o Cloud Firestore.
+3. Gere uma chave de conta de servico em configuracoes do projeto.
+4. Salve o arquivo fora do repositorio, por exemplo:
+
+```text
+C:\firebase-keys\diario-emocional-serviceAccountKey.json
+```
+
+5. Copie `backend/appsettings.Firestore.example.json` para `backend/appsettings.Development.json`.
+6. Edite os valores:
+
+```json
+{
+  "Persistence": {
+    "Provider": "Firestore"
+  },
+  "Firestore": {
+    "ProjectId": "seu-id-do-projeto-firebase",
+    "CredentialPath": "C:\\firebase-keys\\diario-emocional-serviceAccountKey.json"
+  }
+}
+```
+
+7. Rode o backend normalmente:
+
+```powershell
+cd backend
+dotnet run --urls http://localhost:5000
+```
+
+As colecoes criadas no Firestore sao:
+
+- `usuarios`
+- `sessoes`
+- `registrosEmocionais`
+
+Arquivos de credencial como `serviceAccountKey.json` e `*firebase-adminsdk*.json` estao no `.gitignore` e nao devem ser enviados para o GitHub.
 
 Melhorias futuras recomendadas:
 
-- Implementar Firestore e Firebase Authentication.
+- Usar Firebase Authentication no lugar da autenticacao demonstrativa por sessao local.
 - Adicionar testes automatizados de servicos e endpoints.
 - Criar pipeline CI/CD no GitHub Actions.
 - Aplicar HTTPS e CORS restritivo em producao.

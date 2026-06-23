@@ -4,6 +4,8 @@ using DiarioEmocional.Api.Application.Services;
 using DiarioEmocional.Api.Application.Strategies;
 using DiarioEmocional.Api.Domain.Repositories;
 using DiarioEmocional.Api.Infrastructure.Documents;
+using DiarioEmocional.Api.Infrastructure.Firebase;
+using DiarioEmocional.Api.Infrastructure.Firebase.Repositories;
 using DiarioEmocional.Api.Infrastructure.Persistence;
 using DiarioEmocional.Api.Infrastructure.Persistence.Repositories;
 using DiarioEmocional.Api.Infrastructure.Security;
@@ -12,12 +14,23 @@ namespace DiarioEmocional.Api.Infrastructure;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddDiarioEmocional(this IServiceCollection services)
+    public static IServiceCollection AddDiarioEmocional(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddSingleton<JsonDiarioContext>();
-        services.AddScoped<IUserRepository, UserRepository>();
-        services.AddScoped<ISessionRepository, SessionRepository>();
-        services.AddScoped<IEmotionalEntryRepository, EmotionalEntryRepository>();
+        var provider = configuration.GetValue<string>("Persistence:Provider") ?? "Json";
+        if (provider.Equals("Firestore", StringComparison.OrdinalIgnoreCase))
+        {
+            services.AddSingleton<FirestoreContext>();
+            services.AddScoped<IUserRepository, FirestoreUserRepository>();
+            services.AddScoped<ISessionRepository, FirestoreSessionRepository>();
+            services.AddScoped<IEmotionalEntryRepository, FirestoreEmotionalEntryRepository>();
+        }
+        else
+        {
+            services.AddSingleton<JsonDiarioContext>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ISessionRepository, SessionRepository>();
+            services.AddScoped<IEmotionalEntryRepository, EmotionalEntryRepository>();
+        }
 
         services.AddScoped<IPasswordHasher, Sha256PasswordHasher>();
         services.AddScoped<IPdfReportExporter, SimplePdfReportExporter>();

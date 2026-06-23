@@ -6,12 +6,12 @@ flowchart TB
     Domain["Domain: entidades e contratos"]
     Infra["Infrastructure: repositorios, seguranca e PDF"]
     Json["JSON local demonstrativo"]
-    Firestore["Cloud Firestore em producao"]
+    Firestore["Cloud Firestore configuravel"]
 
     Browser --> React
     React -->|"REST/JSON"| Api
     Api --> AppLayer
     AppLayer --> Domain
     AppLayer --> Infra
-    Infra --> Json
-    Infra -. substituicao futura .-> Firestore
+    Infra -->|"Provider Json"| Json
+    Infra -->|"Provider Firestore"| Firestore
